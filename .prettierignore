@@ -1,0 +1,11 @@
+acf-json/
+build/
+vendor/
+*.twig
+composer.lock
+.scaffdog/
+
+/source/wp-content/*
+!/source/wp-content/mu-plugins
+!/source/wp-content/themes
+.github/

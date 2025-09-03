@@ -1,0 +1,7 @@
+.editor-styles-wrapper :where(h1) {
+	@apply text-5xl mb-10;
+}
+
+.wp-block-post-content .wp-block {
+	@apply mb-10;
+}

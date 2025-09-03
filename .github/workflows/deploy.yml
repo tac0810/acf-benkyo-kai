@@ -1,0 +1,41 @@
+name: Deploy for xxx
+
+on:
+  workflow_dispatch:
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: Set up environment variables
+        run: |
+          echo "THEME_NAME=${{ secrets.THEME_NAME }}" >> $GITHUB_ENV
+          echo "VITE_THEME_NAME=${{ secrets.VITE_THEME_NAME }}" >> $GITHUB_ENV
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: 🔨 Build Project
+        run: |
+          npm install
+          npm run base:build
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.STAGING_FTP_SERVER }}
+          username: ${{ secrets.STAGING_FTP_USERNAME }}
+          password: ${{ secrets.STAGING_FTP_PASSWORD }}
+          local-dir: "./${{ secrets.THEME_NAME }}/"
+          server-dir: "/wp-content/themes/${{ secrets.THEME_NAME }}/"
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            fileToExclude.txt
+            **/src/**
