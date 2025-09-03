@@ -51,10 +51,10 @@ if [ ! -e "$root_path/index.php" ]; then
   wp language core install ja --allow-root
   wp site switch-language ja --allow-root
 
-  wp plugin install 'https://downloads.wordpress.org/plugin/intuitive-custom-post-order.3.1.2.zip' --activate --allow-root
-  wp plugin install 'https://downloads.wordpress.org/plugin/wordpress-seo.22.5.zip' --activate --allow-root
+  wp plugin install intuitive-custom-post-order --activate --allow-root
+  wp plugin install wordpress-seo --activate --allow-root
 
-  wp post create --post_type='page' --post_title='Contact' --post_name='contact' --post_status=publish --porcelain
+  wp post create --post_type='page' --post_title='Contact' --post_name='contact' --post_status=publish --porcelain --allow-root
 fi
 
 cd $root_path
