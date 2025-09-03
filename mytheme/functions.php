@@ -95,3 +95,8 @@ if ($_ENV["IS_DEVELOPMENT"] && function_exists("acf_pro_get_license_key")) {
 remove_action( 'wp_enqueue_scripts', 'wp_enqueue_global_styles' );
 remove_action( 'wp_footer', 'wp_enqueue_global_styles', 1 );
 add_filter( 'comments_open', '__return_false' );
+
+// ダミーデータ生成ツール管理画面
+if (is_admin()) {
+  require_once __DIR__ . "/dummy-generator/admin-page.php";
+}
